@@ -1,0 +1,27 @@
+#!/bin/bash
+
+[ "$RGW_PUBSUB_SECRET == "" ] && echo "RGW_PUBSUB_SECRET is not defined" && exit 1
+[ "$RGW_PUBSUB_ACCESS_KEY == "" ] && echo "RGW_PUBSUB_ACCESS_KEY is not defined" && exit 1
+[ "$RGW_PUBSUB_HOST" == "" ] && RGW_PUBSUB_HOST="localhost"
+[ "$RGW_PUBSUB_PORT" == "" ] && RGW_PUBSUB_PORT="8000"
+
+url_prefix=http://$RGW_PUBSUB_HOST:$RGW_PUBSUB_PORT
+
+method=$1
+shift
+path=$1
+shift
+args="$1"
+shift
+
+# echo "args=" $args
+
+url="$url_prefix/$path"
+
+[ "$args" != "" ] && url="$url?$args"
+
+# echo url=$url
+
+cmd="./s3curl.pl  --debug --id $RGW_PUBSUB_ACCESS_KEY --key $RGW_PUBSUB_SECRET -- -X $method $url $*"
+# echo cmd=$cmd
+$cmd

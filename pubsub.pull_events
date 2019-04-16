@@ -1,0 +1,5 @@
+[ "$#" -ne 1 ] && echo "Usage: $0 <sub>" && exit 22
+
+sub=$1
+
+./s3admin GET subscriptions/$sub "events" | json_xs

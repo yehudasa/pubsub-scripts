@@ -1,0 +1,5 @@
+[ "$#" -lt 1 ] && echo "Usage: $0 <bucket>" && exit 22
+
+bucket=$1
+
+./s3admin GET notifications/bucket/$bucket $args

@@ -1,0 +1,8 @@
+[ "$#" -lt 2 ] && echo "Usage: $0 <sub> <event-id>"
+
+sub=$1
+event_id=$1
+
+args="ack&event-id=${event_id}"
+
+./s3admin POST subscriptions/$sub $args

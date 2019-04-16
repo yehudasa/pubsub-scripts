@@ -1,0 +1,6 @@
+[ "$#" -lt 2 ] && echo "Usage: $0 <sub> <topic>" && exit 22
+
+sub=$1
+topic=$2
+
+./s3admin PUT subscriptions/$sub topic=$topic

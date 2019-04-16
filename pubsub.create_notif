@@ -1,0 +1,10 @@
+[ "$#" -lt 2 ] && echo "Usage: $0 <bucket> <topic> [<event>[,...]]" && exit 22
+
+bucket=$1
+topic=$2
+events=$3
+
+args="topic=$topic"
+[ "$events" != "" ] && args=${args}"&events="$events
+
+./s3admin PUT notifications/bucket/$bucket $args

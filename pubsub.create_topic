@@ -1,0 +1,5 @@
+[ "$#" -ne 1 ] && echo "Usage: $0 <topic>" && exit 22
+
+topic=$1
+
+./s3admin PUT topics/$topic
